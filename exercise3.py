@@ -29,13 +29,24 @@ class Cart:
             raise ValueError("Quantity must be atleast 1")
         if not item["available"]: 
             raise OutOfStockError(f"{item["name"]} is out of stock")
+        for line in self.lines:
+            if line["name"] == item["name"]:
+                line["qty"] += qty
+                return
+        self.lines.append({
+            "item_id": item["id"],
+            "name": item["name"],
+            "price": item["price"],
+            "qty" : qty})
 
     def remove_item(self, item_id: int) -> None:
         # TODO: raise KeyError if the item is not in the cart
         for line in self.lines:
             if line["item_id"] == item_id:
+                del self.lines[line]
                 return
         raise KeyError("Item not in cart")
+    
 
     def total(self) -> float:
         return round(sum(line["price"] * line["qty"] for line in self.lines), 2)
