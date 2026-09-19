@@ -57,3 +57,8 @@ def test_removing_an_absent_item_raises():
 
 
 # TODO: add one test of your own. What behaviour is not covered above?
+def test_reomving_an_item():
+    cart = Cart()
+    cart.add_item(RAMEN, 1)     
+    cart.remove_item(1)
+    assert len(cart.lines) == 0      

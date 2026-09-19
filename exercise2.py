@@ -36,7 +36,7 @@ class Cart:
         # TODO
         for line in self.lines:
             if line["item_id"] == item_id:
-                del self.lines[line]
+                self.lines.remove(line)
                 return
 
     def clear(self) -> None:

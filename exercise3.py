@@ -43,7 +43,7 @@ class Cart:
         # TODO: raise KeyError if the item is not in the cart
         for line in self.lines:
             if line["item_id"] == item_id:
-                del self.lines[line]
+                self.lines.remove(line)
                 return
         raise KeyError("Item not in cart")
     
